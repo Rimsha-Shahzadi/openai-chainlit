@@ -6,7 +6,7 @@ if __name__ == "__main__":
     main()
 
 
-# from openai import RateLimitError
+from agents.tool import function_tool
 from typing import Callable
 import asyncio
 import os
@@ -17,6 +17,21 @@ from openai.types.responses import ResponseTextDeltaEvent
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
+
+@function_tool("get_weather")
+def get_weather(location: str , unit: str ="C") -> str:
+    """Fetch the weather of given location, returning a short description"""
+    return f"The weather in {location} is 22 degrees {unit}"
+
+
+@function_tool("student_finder")
+def student_finder(student_roll: int) -> str:
+    """Find the piaic student on the base of roll number"""
+    data = {1:"Rimsha",
+            2:"Tahi",
+            3:"Pari"
+    }
+    return data.get(student_roll,"Not Found")
 
 gemini_api_key=os.getenv("GEMINI_API_KEY")
 
@@ -35,14 +50,15 @@ run_config = RunConfig(
 )
 
 agent1 = Agent(
-    # name="Panaversity support agent",
-    name="joker",
-    instructions="You are a helpful assisstent",
-    # instructions="You are a helpful assisstent that can answer questions about and help with tasks."
+    name="Panaversity support agent",
+    # name="joker",
+    # instructions="You are a helpful assisstent",
+    tools=[get_weather, student_finder],
+    instructions="You are a helpful assisstent that can answer questions about and help with tasks."
 )
 result = Runner.run_sync(
     agent1,   
-    input="Tell me five jokes",
+    input="What is the weather in Lahore",
     run_config=run_config,
 )
 print(result.final_output)
