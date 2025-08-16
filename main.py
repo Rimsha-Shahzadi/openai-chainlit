@@ -5,7 +5,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-
 from agents.tool import function_tool
 from typing import Callable
 import asyncio
@@ -33,6 +32,10 @@ def student_finder(student_roll: int) -> str:
     }
     return data.get(student_roll,"Not Found")
 
+
+
+
+
 gemini_api_key=os.getenv("GEMINI_API_KEY")
 
 client=AsyncOpenAI(
@@ -58,7 +61,8 @@ agent1 = Agent(
 )
 result = Runner.run_sync(
     agent1,   
-    input="What is the weather in Lahore",
+    input="What is the weather in Lahore, Find the piaic student on the base of roll number",
+
     run_config=run_config,
 )
 print(result.final_output)
