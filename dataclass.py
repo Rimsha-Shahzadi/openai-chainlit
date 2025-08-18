@@ -183,16 +183,20 @@
 # print(calc.calculate(13, 7))
 
 # Generics
-from typing import Any, TypeVar
-T = TypeVar['T']
+from typing import TypeVar
+
+T = TypeVar("T")
 
 def first_element(items:list[T]) -> T:
   return items[0]
+# nums =[1, 2, 3]
+# srtings=["a", "b", "c"]
 
-nums = [1, 2, 3,]
-strings = ["a", "b", "c"]
-print(first_element(nums))
-print(first_element(strings))
+num_result = generic_first_element(nums)
+string_result= generic_first_element(strings)
+
+print(num_result)
+print(string_result)
 
 
               
