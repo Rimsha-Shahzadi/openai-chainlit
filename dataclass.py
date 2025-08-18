@@ -167,16 +167,32 @@
 #   print("===Bad Dataclass examples===")
 #   demo_bad_usage()
 
-from dataclasses import dataclass, field
-from typing import Callable
+# Callable
+# from dataclasses import dataclass, field
+# from typing import Callable
 
-@dataclass
-class Calculator:
-    operation: Callable[[int, int],str]
+# @dataclass
+# class Calculator:
+#     operation: Callable[[int, int],str]
 
-    def calculate(self, a: int, b: int) -> str:
-        return self.operation(a, b)
-def add_and_stringify(x: int, y: int) -> str:
-    return str(x+y)    
-calc= Calculator(operation=add_and_stringify)
-print(calc.calculate(13, 7))
+#     def calculate(self, a: int, b: int) -> str:
+#         return self.operation(a, b)
+# def add_and_stringify(x: int, y: int) -> str:
+#     return str(x+y)    
+# calc= Calculator(operation=add_and_stringify)
+# print(calc.calculate(13, 7))
+
+# Generics
+from typing import Any, TypeVar
+T = TypeVar['T']
+
+def first_element(items:list[T]) -> T:
+  return items[0]
+
+nums = [1, 2, 3,]
+strings = ["a", "b", "c"]
+print(first_element(nums))
+print(first_element(strings))
+
+
+              
