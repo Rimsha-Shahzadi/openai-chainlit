@@ -183,20 +183,56 @@
 # print(calc.calculate(13, 7))
 
 # Generics
+# from typing import TypeVar
+
+# T = TypeVar("T")
+
+# def generic_first_element(items:list[T]) -> T:
+#   return items[0]
+# nums =[1, 2, 3]
+# strings=["a", "b", "c"]
+
+# num_result = generic_first_element(nums)
+# string_result= generic_first_element(strings)
+
+# print(num_result)
+# print(string_result)
+
+
 from typing import TypeVar
+K = TypeVar('K')
+V = TypeVar('V')
 
-T = TypeVar("T")
+def get_item(container: dict[K, V], key: K) -> V: 
+  return container[key]    
+r ={'a':10,'b':5000}
+rim = get_item(r,'b')
+print(rim)
 
-def generic_first_element(items:list[T]) -> T:
-  return items[0]
-nums =[1, 2, 3]
-strings=["a", "b", "c"]
+from typing import Generic, TypeVar, ClassVar
+from dataclasses import dataclass, field
 
-num_result = generic_first_element(nums)
-string_result= generic_first_element(strings)
+T = TypeVar('T')
+@dataclass
+class Stack(Generic[T]):
+  items: list[T] = field (default_factory=list)
+  limit: ClassVar[int] = 200
 
-print(num_result)
-print(string_result)
+  def push(self, item:T) -> None:
+    self.items.append(item)
+  def pop(self) -> T:
+    return self.items.pop()
+stacks_of_int = Stack[int]()
+print(stacks_of_int)
+print(stacks_of_int.limit)
+# print(stacks_of_int.pop)
+stacks_of_int.push(500)
 
+stack_of_strings = Stack[str]()
+print(stack_of_strings)
+stack_of_strings.push("Hello")
+stack_of_strings.push("World")
 
-              
+print(stack_of_strings.pop())
+print(Stack.limit)
+print(stack_of_strings.limit)
