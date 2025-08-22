@@ -199,40 +199,40 @@
 # print(string_result)
 
 
-from typing import TypeVar
-K = TypeVar('K')
-V = TypeVar('V')
+# from typing import TypeVar
+# K = TypeVar('K')
+# V = TypeVar('V')
 
-def get_item(container: dict[K, V], key: K) -> V: 
-  return container[key]    
-r ={'a':10,'b':5000}
-rim = get_item(r,'b')
-print(rim)
+# def get_item(container: dict[K, V], key: K) -> V: 
+#   return container[key]    
+# r ={'a':10,'b':5000}
+# rim = get_item(r,'b')
+# print(rim)
 
-from typing import Generic, TypeVar, ClassVar
-from dataclasses import dataclass, field
+# from typing import Generic, TypeVar, ClassVar
+# from dataclasses import dataclass, field
 
-T = TypeVar('T')
-@dataclass
-class Stack(Generic[T]):
-  items: list[T] = field (default_factory=list)
-  limit: ClassVar[int] = 200
+# T = TypeVar('T')
+# @dataclass
+# class Stack(Generic[T]):
+#   items: list[T] = field (default_factory=list)
+#   limit: ClassVar[int] = 200
 
-  def push(self, item:T) -> None:
-    self.items.append(item)
-  def pop(self) -> T:
-    return self.items.pop()
-stacks_of_int = Stack[int]()
-print(stacks_of_int)
-print(stacks_of_int.limit)
-# print(stacks_of_int.pop)
-stacks_of_int.push(500)
+#   def push(self, item:T) -> None:
+#     self.items.append(item)
+#   def pop(self) -> T:
+#     return self.items.pop()
+# stacks_of_int = Stack[int]()
+# print(stacks_of_int)
+# print(stacks_of_int.limit)
+# # print(stacks_of_int.pop)
+# stacks_of_int.push(500)
 
-stack_of_strings = Stack[str]()
-print(stack_of_strings)
-stack_of_strings.push("Hello")
-stack_of_strings.push("World")
+# stack_of_strings = Stack[str]()
+# print(stack_of_strings)
+# stack_of_strings.push("Hello")
+# stack_of_strings.push("World")
 
-print(stack_of_strings.pop())
-print(Stack.limit)
-print(stack_of_strings.limit)
+# print(stack_of_strings.pop())
+# print(Stack.limit)
+# print(stack_of_strings.limit)
